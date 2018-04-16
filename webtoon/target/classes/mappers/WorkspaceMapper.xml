@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.support.toon.mappers.WorkspaceMapper">
+
+	<select id="overlapCheck_teamname" resultType="int">
+		select count(*)
+		from workspace where w_teamname = #{w_teamname}
+	</select>
+
+	<insert id="Insert_Workspace">
+		insert into workspace(w_owner, w_teamname, w_title, w_information, w_logo)
+		values(#{w_owner}, #{w_teamname}, #{w_title}, #{w_information}, #{w_logo})
+	</insert>
+	
+	<insert id="Insert_Workspace_Hobby">
+		insert into workspace_hobby(w_no, h_no) values( (select w_no from workspace where w_teamname = #{w_teamname}), #{w_hobby})
+	</insert>
+</mapper>

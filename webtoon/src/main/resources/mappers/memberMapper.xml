@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.support.toon.mappers.memberMapper">
+
+	<select id="overlapCheck_ID" resultType="int">
+		select count(*) from
+		member where m_id = #{m_id}
+	</select>
+
+	<select id="overlapCheck_NICK" resultType="int">
+		select count(*) from
+		member where m_nick = #{m_nick}
+	</select>
+
+	<insert id="Insert_Member">
+		insert into member(m_id, m_pw, m_nick, m_birthday,
+		m_gender, m_class, m_location)
+		values(#{m_id}, #{m_pw}, #{m_nick},
+		#{m_birthday}, #{m_gender}, #{m_class}, #{m_location})
+	</insert>
+
+	<insert id="Insert_Member_Hobby">
+		insert into member_hobby(m_no, h_no) values( (select
+		m_no from member where m_id = #{m_id}), #{m_hobby} )
+	</insert>
+
+	<select id="LoginMember" resultType="int">
+		select count(*) from member
+		where m_id = #{m_id} and m_pw = #{m_pw}
+	</select>
+
+	<select id="Member_info" resultType="Member">
+		select * from member where	
+		m_id = #{m_id}
+	</select>
+
+</mapper>
