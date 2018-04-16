@@ -17,4 +17,6 @@
 	<insert id="Insert_Workspace_Hobby">
 		insert into workspace_hobby(w_no, h_no) values( (select w_no from workspace where w_teamname = #{w_teamname}), #{w_hobby})
 	</insert>
+	
+	<select id="lecqwe"></select>
 </mapper>
